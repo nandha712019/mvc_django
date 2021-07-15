@@ -1,22 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.template import loader
 
 from .models import Media, Favourite
 
 
-def index(request):
-    return render(request, 'hello.html')
-
-
 def audio(request):
-    all_audio = Media.objects.all().filter(Media_type='audio')
-    #return render(request, 'hello.html', all_audio)
-    template =loader.get_template('hello.html')
-    context = {
-        'audio': all_audio,
-    }
-    return HttpResponse(template.render(context, request))
+    queryset = Media.objects.all().filter(Media_type='Audio')
+    return render(request, 'audios.html' , {'audio': queryset})
 
 
 def detail(request, question_id):
