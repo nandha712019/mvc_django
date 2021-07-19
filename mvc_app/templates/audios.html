@@ -2,6 +2,74 @@
 <head>
 <title>Media</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<style>
+    .container{
+  width: 75%;
+  margin-top: 10px;
+}
+@media screen and (min-width:600px){
+.card{
+  transition:all 0.2s;
+}
+.card:hover{
+  margin-top: -3px;
+  transition:all 0.15s;
+}
+h1{
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.row{
+  margin-left: 20px;
+}
+}
+h1{
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.card{
+ height: 240px;
+ width: 270px;
+}
+p.title ,.date{
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+a{
+  color: black;
+  text-decoration: none;
+}
+.p-2{
+  margin-top: -4px;
+}
+.p-2 p{
+  font-size: 9px;
+  margin-top: -11px;
+}
+.card-img{
+  border-radius: 0%;
+  width: 269px;
+  height: 140px;
+  object-fit:cover;
+}
+.like{
+  color: red;
+}
+.row{
+  margin-bottom: 10px;
+}
+.col{
+  padding: 10px;
+}
+.title{
+  font-size: 15px;
+  margin-top: 5px;
+}
+.date{font-size: 10px;}
+
+</style>
 </head>
 <body>
     <nav class="navbar navbar-light bg-primary">
@@ -26,14 +94,16 @@
         </div>
     </nav>
 
-    <div class="container position-absolute top-50 start-0 translate-middle-y">
+    <div class="container translate-middle-y">
         <div class="row">
             <div class="col">
-                {% for media in audios %}
-                <div class="card shadow w-25">
-                    <h5>{{ media.title }}</h5>
-                    <p>{{ media.date }}</p>
-                    <video poster="{{ media.thumbnail }"></video>
+                {% for media in audio %}
+               <div class="card shadow" loading="lazy" title="{{ item.Title }}">
+          <p class="title"> {{ media.Title }}</p>
+          <p class="date"> {{ media.created_on }}</p>
+                    <video class="card-img" controls poster="{{ media.Thumbnail }}"
+            src="{{ media.Media_link }}" type="audio/webm" loading="lazy" autopictureinpicture="true" preload="none">
+                    </video>
                     <span>{{ media.like }}</span>
                     <a href=""> {{ media.share }} </a>
                 </div>

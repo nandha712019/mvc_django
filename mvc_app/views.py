@@ -1,12 +1,17 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from django.views.generic import ListView, DetailView
 from .models import Media, Favourite
 
 
 def audio(request):
     queryset = Media.objects.all().filter(Media_type='Audio')
     return render(request, 'audios.html' , {'audio': queryset})
+
+
+def video(request):
+    queryset = Media.objects.all().filter(Media_type='Video')
+    return render(request, 'Videos.html' , {'video': queryset})
 
 
 def detail(request, question_id):
