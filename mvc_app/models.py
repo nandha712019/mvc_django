@@ -6,6 +6,7 @@ from django.db import models
 
 class Media(models.Model):
     """Database table for Media details!!!"""
+
     Media_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     Media_link = models.FileField(upload_to="uploads/", unique=True, default='')
     Media_type = models.CharField('Media_type', max_length=20, default='Audio',

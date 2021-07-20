@@ -1,6 +1,8 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
+from django.views.decorators.http import require_http_methods
+
 from .models import Media, Favourite
 
 
@@ -14,14 +16,24 @@ def video(request):
     return render(request, 'Videos.html' , {'video': queryset})
 
 
-def detail(request, question_id):
-    return HttpResponse("You're looking at question %s." % question_id)
+@require_http_methods(["GET"])
+def favourite(request, user, Media_id):
+    queryset = Favourite.objects.all().filter(user='%s' % user, Media_id='%s' % Media_id)
+    if len(queryset) == 0:
+        isfavourite=False
+    elif len(queryset) == 1:
+        isfavourite=True
+    else:
+        isfavourite="Something went wrong in isfavourite"
+    popularity = Favourite.objects.all().filter(Media_id='%s' % Media_id).count()
+    context = {
+        'isfavourite': isfavourite,
+        'popularity': popularity,
+    }
+    return render(request, 'favouriteGet.html', context)
 
-
-def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
-
-
-def vote(request, question_id):
-    return HttpResponse("You're voting on question %s." % question_id)
+@require_http_methods(["POST"])
+def favouritePost(request):
+    mid = request.path.split('/')[-1]
+    user = request.path.split('/')[-2]
+    return 'hello'
