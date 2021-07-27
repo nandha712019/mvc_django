@@ -123,5 +123,5 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = 'uploads/'
 MEDIA_URL = '/'
 
-LOGIN_REDIRECT_URL = '/audio/'
+LOGIN_REDIRECT_URL = '/video/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
